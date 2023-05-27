@@ -2,23 +2,28 @@
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+    public MainPage()
+    {
+        InitializeComponent();
+    }
 
-	public MainPage()
-	{
-		InitializeComponent();
-	}
+    private async void OnCounterClicked(object sender, EventArgs e)
+    {
+        if (MediaPicker.Default.IsCaptureSupported)
+        {
+            FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
 
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
+            if (photo != null)
+            {
+                // save the file into local storage
+                string localFilePath = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
+                using Stream sourceStream = await photo.OpenReadAsync();
+                using FileStream localFileStream = File.OpenWrite(localFilePath);
 
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+                await sourceStream.CopyToAsync(localFileStream);
+            }
+        }
+    }
 }
 
