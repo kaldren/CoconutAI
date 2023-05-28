@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CoconutAI.Views.ScanView"
-             Title="ScanView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Scan and let AI do the rest"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             xmlns:viewModels="clr-namespace:CoconutAI.ViewModels"
+             x:Class="CoconutAI.Views.ScanView">
+    
+    <ContentPage.BindingContext>
+        <viewModels:ScanViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Spacing="10" Margin="10">
+        <Button Text="Scan" Command="{Binding ScanCommand}" />
     </VerticalStackLayout>
 </ContentPage>
