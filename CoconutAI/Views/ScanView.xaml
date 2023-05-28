@@ -5,7 +5,7 @@
              Title="ScanView">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Scan and let AI do the rest"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
     </VerticalStackLayout>
